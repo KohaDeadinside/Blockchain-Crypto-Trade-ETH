@@ -1,3 +1,7 @@
+Contract chỉ nên được migrate (hoặc gọi là deploy) 1 lần lên blockchain trừ khi có sửa đổi cấu trúc contract 
+Sau khi migrate, lưu lại contract address để gọi lại
+Lệnh migrate contract sẽ có output giống như thế này:
+
 Deploying 'CryptoExchange'
    --------------------------
 
@@ -23,7 +27,10 @@ Summary
 =======
 > Total deployments:   1
 > Final cost:          0.001897303761373546 ETH
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+Đây là ví dụ thứ 2 cho output migrate
 Starting migrations...
 ======================
 > Network name:    'development'
