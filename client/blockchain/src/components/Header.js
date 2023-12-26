@@ -4,15 +4,17 @@ import Eth from "../eth.svg";
 import { Link } from "react-router-dom";
 
 
-const Header = () => {
+const Header = props => {
+  const {address, isConnected, connect} = props;
+
   return (
     <header>
       <div className="leftH">
         <img src={Logo} alt="logo" className="logo" />
-        <Link to="/" className="link">
+        {/* <Link to="/" className="link">
           <div className="headerItem">Swap</div>
-        </Link>
-        <Link to="/transfer" className="link">
+        </Link> */}
+        <Link to="/" className="link">
           <div className="headerItem">Transfer</div>
         </Link>
         <Link to="/tokens" className="link">
@@ -24,9 +26,9 @@ const Header = () => {
           <img src={Eth} alt="eth" className="eth" />
           Ethereum
         </div>
-        {/* <div className="connectButton" onClick={connect}>
-          {isConnected ? (address.slice(0,4) +"..." +address.slice(38)) : "Connect"}
-        </div> */}
+        <div className="connectButton" onClick={connect}>
+          {isConnected ? address : "Connect"}
+        </div>
       </div>
     </header>
   )
