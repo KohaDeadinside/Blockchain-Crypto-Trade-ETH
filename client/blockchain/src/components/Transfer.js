@@ -48,17 +48,30 @@ const Transfer = props => {
 
     // Phương thức này lấy số dư của owner
     const balance = await contract.methods.getOwnerBalance().call();
-      console.log("bef:", balance);
+
     // Phương thức này thêm thông tin người chuyển
     const addSuccess = await contract.methods
       .addReceiver(receiverAddress, receiverName, amount)
       .send({ from: fromAddress,  gas: 200000,
         gasPrice: 1000000000 });
+
+
+    const transactionObject1 = {
+        from: "0x054776Faa7617f3a370267e21617ff61a16f3336",
+        // gas: 200000,
+        // gasPrice: 1000000000,
+    };
+    // Phương thức này thêm thông tin người chuyển
+    const addSuccess = await contract.methods.addReceiver("0xD50B0814bbe073182E42D31806865826E9785F89",receiverName, 0)
+        .send(transactionObject1);
+
     const receiver = await contract.methods.receiver().call();
-    console.log(balance);
+    console.log(receiver);
+    // console.log(balance);
 
     // Sửa biến owner address, chuyển đổi đơn vị để gửi token
     const transactionObject = {
+
       from: fromAddress,
       value: web3.utils.toWei(amount, unit2) // Giá trị chuyển đi
     };
@@ -69,13 +82,10 @@ const Transfer = props => {
       .send(transactionObject);
 
     const receiver2 = await contract.methods.receiver().call();
-    // const balance2 = await contract.methods.getOwnerBalance().call();
-    // console.log("after:", balance2);
     setAddress(null);
     setAmount(null);
     setUnitChange(unit[0]);
     alert("Send success");
-  }
   return (
     <div>
       <Modal
