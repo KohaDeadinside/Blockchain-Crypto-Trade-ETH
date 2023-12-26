@@ -175,7 +175,8 @@ function Swap(props) {
             <DownOutlined /> */}
           </div>
         </div>
-        <div className="swapButton" >Swap</div>
+        {/* <div className="swapButton" >Swap</div> */}
+        <div className="swapButton" disabled={!tokenOneAmount}>Swap</div>
       </div>
     </>
   );
