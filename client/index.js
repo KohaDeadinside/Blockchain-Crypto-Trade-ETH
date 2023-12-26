@@ -19,10 +19,10 @@ const init = async () => {
 
     // Phương thức này thêm thông tin người chuyển
     // Bắt giá trị vào các biến dưới đây
-    var receiverAddress = ;
-    var receiverName = ;
+    var receiverAddress = "0x7b79D862cfB24390e2eA88A0a367C126eB7F4089";
+    var receiverName ="abc";
     const addSuccess = await contract.methods.addReceiver(receiverAddress, receiverName, 0)
-        .send({ from: "0x054776Faa7617f3a370267e21617ff61a16f3336" });
+        .send({ from: "0x1a7160A8DDf486a25a8df62AC4927f6B0b10d387" });
     const receiver = await contract.methods.receiver().call();
 
     // console.log(ownerAddress);
@@ -31,7 +31,7 @@ const init = async () => {
 
     // Sửa biến owner address, chuyển đổi đơn vị để gửi token
     const transactionObject = {
-        from: "0x054776Faa7617f3a370267e21617ff61a16f3336",
+        from: "0x1a7160A8DDf486a25a8df62AC4927f6B0b10d387",
         value: web3.utils.toWei(1, "ether"), // Giá trị chuyển đi
     };
 
