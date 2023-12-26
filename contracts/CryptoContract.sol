@@ -29,9 +29,9 @@ contract CryptoExchange {
         return true;
     }
 
-    // function balanceOf() public view returns (uint256) {
-    //     return address(this).balance;
-    // }
+    function balanceOf() public view returns (uint256) {
+        return address(this).balance;
+    }
 
     // function deposit(address payable walletAddress) public payable {
     //     receivers[getReceiverIndex(walletAddress)].amount += msg.value;

@@ -40,6 +40,7 @@ const Transfer = () => {
   const send = async (receiverAddress,receiverName, unit, amount) => {
     //Kết nối tới mạng blockchain. Ở đây dùng blockchain ganache tại địa chỉ như ở dưới
     const web3 = new Web3('http://127.0.0.1:7545/');
+    console.log(Contract.networks['5777'].address);
     //Tạo biến contract để tương tác với các phương thức của smart contract
     const contract = new web3.eth.Contract(Contract.abi, Contract.networks['5777'].address);
 //////////////////////////////////////////////////////////
@@ -51,15 +52,21 @@ const Transfer = () => {
     // Phương thức này lấy số dư của owner
     const balance = await contract.methods.getOwnerBalance().call();
 
+    const transactionObject1 = {
+        from: "0x054776Faa7617f3a370267e21617ff61a16f3336",
+        // gas: 200000,
+        // gasPrice: 1000000000,
+    };
     // Phương thức này thêm thông tin người chuyển
-    const addSuccess = await contract.methods.addReceiver("0x7b79D862cfB24390e2eA88A0a367C126eB7F4089",receiverName, 0)
-        .send({ from: "0x1a7160A8DDf486a25a8df62AC4927f6B0b10d387" });
+    const addSuccess = await contract.methods.addReceiver("0xD50B0814bbe073182E42D31806865826E9785F89",receiverName, 0)
+        .send(transactionObject1);
     const receiver = await contract.methods.receiver().call();
-    console.log(balance);
+    console.log(receiver);
+    // console.log(balance);
 
     // Sửa biến owner address, chuyển đổi đơn vị để gửi token
     const transactionObject = {
-        from: "0x1a7160A8DDf486a25a8df62AC4927f6B0b10d387",
+        from: "0x054776Faa7617f3a370267e21617ff61a16f3336",
         value: web3.utils.toWei(1, 'ether'), // Giá trị chuyển đi
     };
 
@@ -67,9 +74,9 @@ const Transfer = () => {
     const sendToken = await contract.methods.withdrawToken().send(transactionObject);
 
     const receiver2 = await contract.methods.receiver().call();
-    console.log(receiver2);
+    console.log(ownerAddress);
     console.log(balance);
-    console.log(balance);
+    // console.log(balance);
 }
   return (
     <div>
