@@ -24,7 +24,7 @@ function App() {
           {/* isConnected={isConnected} address={address} */}
           {/* <Route path="/" element={<Swap  />} /> */}
           <Route path="/" element={<Transfer connect={connect} isConnected={isConnected} fromAddress={address}  />} />
-          <Route path="/tokens" element={<Tokens />} />
+          <Route path="/tokens" element={<Tokens fromAddress={address}  />} />
         </Routes>
       </div>
 
