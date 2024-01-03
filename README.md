@@ -10,3 +10,5 @@ Cách chạy blockchain bằng terminal:
 5 Tạo một terminal mới, gõ lệnh cd client/blockchain để vào thư mục blockchain
 6 Gõ lệnh npm i để cài đặt các module cần thiết
 7 Gõ lệnh npm start để chạy web
+
+Lưu ý: Không tắt Ganache và terminal đang chạy truffle console trong quá trình chạy project
