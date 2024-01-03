@@ -8,20 +8,24 @@ import {
 import Web3 from "web3";
 import Contract from "../contracts/CryptoExchange.json";
 const Transfer = props => {
+  console.log("abc");
   const unit = ["wei", "gwei", "ether"];
   const [amount, setAmount] = useState(null);
   const [unitChange, setUnitChange] = useState(unit[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState(null);
   const { fromAddress, isConnected, connect } = props;
+
   function openModal() {
     setIsOpen(true);
   }
+
   function modifyToken(i) {
     setUnitChange(unit[i]);
 
     setIsOpen(false);
   }
+
   const handleSend = async () => {
     if (!amount || !address) {
       alert("Address is empty || Amount is empty!");
@@ -33,8 +37,9 @@ const Transfer = props => {
       send(address, "username", unitChange, amount);
     }
   };
+
   const send = async (receiverAddress, receiverName, unit2, amount) => {
-    
+
     //Kết nối tới mạng blockchain. Ở đây dùng blockchain ganache tại địa chỉ như ở dưới
     const web3 = new Web3("http://127.0.0.1:7545/");
     //Tạo biến contract để tương tác với các phương thức của smart contract
@@ -52,18 +57,21 @@ const Transfer = props => {
     // Phương thức này thêm thông tin người chuyển
     const addSuccess = await contract.methods
       .addReceiver(receiverAddress, receiverName, amount)
-      .send({ from: fromAddress,  gas: 200000,
-        gasPrice: 1000000000 });
+      .send({
+        from: fromAddress,
+        gas: 200000,
+        gasPrice: 1000000000
+      });
 
 
-    const transactionObject1 = {
-        from: "0x054776Faa7617f3a370267e21617ff61a16f3336",
-        // gas: 200000,
-        // gasPrice: 1000000000,
-    };
-    // Phương thức này thêm thông tin người chuyển
-    const addSuccess = await contract.methods.addReceiver("0xD50B0814bbe073182E42D31806865826E9785F89",receiverName, 0)
-        .send(transactionObject1);
+    // const transactionObject1 = {
+    //     from: "0x054776Faa7617f3a370267e21617ff61a16f3336",
+    //     // gas: 200000,
+    //     // gasPrice: 1000000000,
+    // };
+    // // Phương thức này thêm thông tin người chuyển
+    // const addSuccess = await contract.methods.addReceiver("0xD50B0814bbe073182E42D31806865826E9785F89",receiverName, 0)
+    //     .send(transactionObject1);
 
     const receiver = await contract.methods.receiver().call();
     console.log(receiver);
@@ -71,21 +79,21 @@ const Transfer = props => {
 
     // Sửa biến owner address, chuyển đổi đơn vị để gửi token
     const transactionObject = {
-
       from: fromAddress,
       value: web3.utils.toWei(amount, unit2) // Giá trị chuyển đi
     };
 
-    // //Phương thức để chuyển token
-    const sendToken = await contract.methods
-      .withdrawToken()
-      .send(transactionObject);
+    //Phương thức để chuyển token
+    const sendToken = await contract.methods.withdrawToken().send(transactionObject);
 
     const receiver2 = await contract.methods.receiver().call();
     setAddress(null);
     setAmount(null);
     setUnitChange(unit[0]);
     alert("Send success");
+    console.log("Receiver:", receiver2);
+  };
+  
   return (
     <div>
       <Modal
@@ -94,15 +102,15 @@ const Transfer = props => {
         title="Select a unit"
       >
         <div className="modalContent">
-        {unit?.map((e, i) => {
+          {unit?.map((e, i) => {
             return (
               <div
                 className="tokenChoice"
                 key={i}
-                value={unitChange} 
+                value={unitChange}
                 onClick={() => modifyToken(i)}
               >
-                 {unit[i]}
+                {unit[i]}
               </div>
             );
           })}
@@ -137,6 +145,6 @@ const Transfer = props => {
       </div>
     </div>
   );
-};
 
+};
 export default Transfer;

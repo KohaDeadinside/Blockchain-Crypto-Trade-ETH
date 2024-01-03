@@ -1,4 +1,3 @@
-const path = require("path");
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -46,6 +45,8 @@ const path = require("path");
 // const { MNEMONIC, PROJECT_ID } = process.env;
 
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+const path = require("path");
 
 module.exports = {
   /**
